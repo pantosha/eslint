@@ -878,7 +878,8 @@ describe("eslint", () => {
                 line: 1,
                 column: 1,
                 source: "0",
-                fix: { range: [1, 1], text: "" }
+                fix: { range: [1, 1], text: "" },
+                fixes: [{ range: [1, 1], text: "" }]
             });
         });
 
@@ -1062,7 +1063,8 @@ describe("eslint", () => {
                 line: 42,
                 column: 24,
                 source: "",
-                fix: { range: [1, 1], text: "" }
+                fix: { range: [1, 1], text: "" },
+                fixes: [{ range: [1, 1], text: "" }]
             });
         });
 

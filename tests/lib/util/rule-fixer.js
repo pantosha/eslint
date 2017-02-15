@@ -9,13 +9,31 @@
 //------------------------------------------------------------------------------
 
 const assert = require("chai").assert,
-    ruleFixer = require("../../../lib/util/rule-fixer");
+    espree = require("espree"),
+    SourceCode = require("../../../lib/util/source-code"),
+    RuleFixer = require("../../../lib/util/rule-fixer");
+
+//------------------------------------------------------------------------------
+// Helpers
+//------------------------------------------------------------------------------
+
+const DEFAULT_CONFIG = {
+    ecmaVersion: 6,
+    comment: true,
+    tokens: true,
+    range: true,
+    loc: true
+};
+const TEXT = "let foo = bar;";
+const AST = espree.parse(TEXT, DEFAULT_CONFIG);
+const SOURCE_CODE = new SourceCode(TEXT, AST);
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 describe("RuleFixer", () => {
+    const ruleFixer = new RuleFixer(SOURCE_CODE);
 
     describe("insertTextBefore", () => {
 

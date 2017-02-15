@@ -24,63 +24,99 @@ const INSERT_AT_END = {
         fix: {
             range: [TEST_CODE.length, TEST_CODE.length],
             text: "// end"
-        }
+        },
+        fixes: [{
+            range: [TEST_CODE.length, TEST_CODE.length],
+            text: "// end"
+        }]
     },
     INSERT_AT_START = {
         message: "Start",
         fix: {
             range: [0, 0],
             text: "// start\n"
-        }
+        },
+        fixes: [{
+            range: [0, 0],
+            text: "// start\n"
+        }]
     },
     INSERT_IN_MIDDLE = {
         message: "Multiply",
         fix: {
             range: [13, 13],
             text: "5 *"
-        }
+        },
+        fixes: [{
+            range: [13, 13],
+            text: "5 *"
+        }]
     },
     REPLACE_ID = {
         message: "foo",
         fix: {
             range: [4, 10],
             text: "foo"
-        }
+        },
+        fixes: [{
+            range: [4, 10],
+            text: "foo"
+        }]
     },
     REPLACE_VAR = {
         message: "let",
         fix: {
             range: [0, 3],
             text: "let"
-        }
+        },
+        fixes: [{
+            range: [0, 3],
+            text: "let"
+        }]
     },
     REPLACE_NUM = {
         message: "5",
         fix: {
             range: [13, 14],
             text: "5"
-        }
+        },
+        fixes: [{
+            range: [13, 14],
+            text: "5"
+        }]
     },
     REMOVE_START = {
         message: "removestart",
         fix: {
             range: [0, 4],
             text: ""
-        }
+        },
+        fixes: [{
+            range: [0, 4],
+            text: ""
+        }]
     },
     REMOVE_MIDDLE = {
         message: "removemiddle",
         fix: {
             range: [5, 10],
             text: ""
-        }
+        },
+        fixes: [{
+            range: [5, 10],
+            text: ""
+        }]
     },
     REMOVE_END = {
         message: "removeend",
         fix: {
             range: [14, 18],
             text: ""
-        }
+        },
+        fixes: [{
+            range: [14, 18],
+            text: ""
+        }]
     },
     NO_FIX = {
         message: "nofix"
@@ -90,28 +126,44 @@ const INSERT_AT_END = {
         fix: {
             range: [0, 0],
             text: "\uFEFF"
-        }
+        },
+        fixes: [{
+            range: [0, 0],
+            text: "\uFEFF"
+        }]
     },
     INSERT_BOM_WITH_TEXT = {
         message: "insert-bom",
         fix: {
             range: [0, 0],
             text: "\uFEFF// start\n"
-        }
+        },
+        fixes: [{
+            range: [0, 0],
+            text: "\uFEFF// start\n"
+        }]
     },
     REMOVE_BOM = {
         message: "remove-bom",
         fix: {
             range: [-1, 0],
             text: ""
-        }
+        },
+        fixes: [{
+            range: [-1, 0],
+            text: ""
+        }]
     },
     REPLACE_BOM_WITH_TEXT = {
         message: "remove-bom",
         fix: {
             range: [-1, 0],
             text: "// start\n"
-        }
+        },
+        fixes: [{
+            range: [-1, 0],
+            text: "// start\n"
+        }]
     },
     NO_FIX1 = {
         message: "nofix1",
