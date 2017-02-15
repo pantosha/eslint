@@ -43,6 +43,7 @@ rules:
     no-confusing-arrow: "error"
     no-console: "error"
     no-delete-var: "error"
+    no-else-return: "error"
     no-eval: "error"
     no-extend-native: "error"
     no-extra-bind: "error"
@@ -83,6 +84,7 @@ rules:
     no-undefined: "error"
     no-underscore-dangle: ["error", {allowAfterThis: true}]
     no-unmodified-loop-condition: "error"
+    no-unneeded-ternary: "error"
     no-unused-expressions: "error"
     no-unused-vars: ["error", {vars: "all", args: "after-used"}]
     no-use-before-define: "error"
@@ -96,8 +98,10 @@ rules:
     object-curly-spacing: ["error", "always"]
     object-shorthand: "error"
     one-var-declaration-per-line: "error"
+    operator-linebreak: "error"
     prefer-arrow-callback: "error"
     prefer-const: "error"
+    prefer-promise-reject-errors: "error"
     prefer-template: "error"
     quotes: ["error", "double"]
     quote-props: ["error", "as-needed"]
@@ -113,6 +117,7 @@ rules:
     spaced-comment: ["error", "always", { exceptions: ["-"]}]
     strict: ["error", "global"]
     template-curly-spacing: ["error", "never"]
+    template-tag-spacing: "error"
     valid-jsdoc: ["error", {
         prefer: { "return": "returns"},
         preferType: {

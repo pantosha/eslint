@@ -85,7 +85,28 @@ ruleTester.run("no-var", rule, {
                 }
             ]
         },
-
+        {
+            code: "for (var i = 0; i < list.length; ++i) { foo(i) }",
+            output: "for (let i = 0; i < list.length; ++i) { foo(i) }",
+            errors: [
+                { message: "Unexpected var, use let or const instead.", type: "VariableDeclaration" }
+            ]
+        },
+        {
+            code: "for (var i = 0, i = 0; false;);",
+            output: "for (var i = 0, i = 0; false;);",
+            errors: [
+                { message: "Unexpected var, use let or const instead.", type: "VariableDeclaration" }
+            ]
+        },
+        {
+            code: "var i = 0; for (var i = 1; false;); console.log(i);",
+            output: "var i = 0; for (var i = 1; false;); console.log(i);",
+            errors: [
+                { message: "Unexpected var, use let or const instead.", type: "VariableDeclaration" },
+                { message: "Unexpected var, use let or const instead.", type: "VariableDeclaration" }
+            ]
+        },
 
         // Not fix if it's redeclared or it's used from outside of the scope or it's declared on a case chunk.
         {
@@ -153,6 +174,76 @@ ruleTester.run("no-var", rule, {
             output: "for (let a of b) { var c; console.log(c); c = 'hello'; }",
             errors: [
                 "Unexpected var, use let or const instead."
+            ]
+        },
+
+        // https://github.com/eslint/eslint/issues/7950
+        {
+            code: "var a = a",
+            output: "var a = a",
+            errors: [
+                "Unexpected var, use let or const instead."
+            ]
+        },
+        {
+            code: "var {a = a} = {}",
+            output: "var {a = a} = {}",
+            parserOptions: { ecmaVersion: 2015 },
+            errors: [
+                "Unexpected var, use let or const instead."
+            ]
+        },
+        {
+            code: "var {a = b, b} = {}",
+            output: "var {a = b, b} = {}",
+            parserOptions: { ecmaVersion: 2015 },
+            errors: [
+                "Unexpected var, use let or const instead."
+            ]
+        },
+        {
+            code: "var {a, b = a} = {}",
+            output: "let {a, b = a} = {}",
+            parserOptions: { ecmaVersion: 2015 },
+            errors: [
+                "Unexpected var, use let or const instead."
+            ]
+        },
+        {
+            code: "var a = b, b = 1",
+            output: "var a = b, b = 1",
+            parserOptions: { ecmaVersion: 2015 },
+            errors: [
+                "Unexpected var, use let or const instead."
+            ]
+        },
+        {
+            code: "var a = b; var b = 1",
+            output: "let a = b; var b = 1",
+            parserOptions: { ecmaVersion: 2015 },
+            errors: [
+                "Unexpected var, use let or const instead.",
+                "Unexpected var, use let or const instead."
+            ]
+        },
+
+        // This case is not in TDZ, but it's very hard to distinguish the reference is in TDZ or not.
+        // So this rule does not fix it for safe.
+        {
+            code: "function foo() { a } var a = 1; foo()",
+            output: "function foo() { a } var a = 1; foo()",
+            parserOptions: { ecmaVersion: 2015 },
+            errors: [
+                "Unexpected var, use let or const instead."
+            ]
+        },
+
+        // https://github.com/eslint/eslint/issues/7961
+        {
+            code: "if (foo) var bar = 1;",
+            output: "if (foo) var bar = 1;",
+            errors: [
+                { message: "Unexpected var, use let or const instead.", type: "VariableDeclaration" }
             ]
         }
     ]
